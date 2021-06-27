@@ -11,7 +11,7 @@ class Vector2:
         self.y = y
 
     def __len__(self):
-        return (self.x ** 2 + self.y ** 2) ** 0.5
+        return int((self.x ** 2 + self.y ** 2) ** 0.5)
 
     def __mul__(self, other):
         if isinstance(other, int) or isinstance(other, float):
@@ -22,6 +22,10 @@ class Vector2:
 
     def __sub__(self, other):
         return Vector2(self.x - other.x, self.y - other.y)
+
+    @property
+    def modulus(self):
+        return (self.x ** 2 + self.y ** 2) ** 0.5
 
     @property
     def angle(self):
