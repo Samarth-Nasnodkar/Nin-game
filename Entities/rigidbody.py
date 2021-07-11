@@ -3,7 +3,8 @@ from math import atan
 
 
 class RigidBody:
-    def __init__(self, coords: tuple):
+    def __init__(self, coords: tuple, tag=None):
+        self.tag = None
         self.startX = coords[0]
         self.startY = coords[1]
         self.endX = coords[2]

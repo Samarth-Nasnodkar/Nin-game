@@ -16,11 +16,13 @@ class Entity:
             gravity=Vector2(0, 60),
             collisionFree=False,
             animated=False,
-            frameDifference=0
+            frameDifference=0,
+            tag=None
     ):
         self.position = position
         self.velocity = velocity
         self.mass = mass
+        self.tag = tag
         self.e = restitution
         self.rigidBody = rigidbody
         self.dynamic = dynamic

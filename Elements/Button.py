@@ -3,12 +3,13 @@ from threading import Event, Thread
 
 
 class Button:
-    def __init__(self, left, top, width, height, surface: pygame.Surface = None):
+    def __init__(self, left, top, width, height, surface: pygame.Surface = None, tag=None):
         self.__coords = (left, top)
         self.__dims = (width, height)
         self.rect = pygame.Rect(left, top, width, height)
         self.__clicked = Event()
         self.surface = surface
+        self.tag = tag
 
     def on_click(self, func):
         mt = Thread(target=self.__click_event_loop)

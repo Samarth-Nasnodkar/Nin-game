@@ -3,8 +3,9 @@ from Entities.entity import Entity
 
 
 class StaticCollider:
-    def __init__(self, body: RigidBody) -> None:
+    def __init__(self, body: RigidBody, tag=None) -> None:
         self.rigidBody = body
+        self.tag = tag
 
     def move_to(self, position: tuple):
         self.rigidBody.move_to(position)
