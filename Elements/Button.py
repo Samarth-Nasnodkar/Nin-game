@@ -8,6 +8,7 @@ class Button:
         self.__dims = (width, height)
         self.rect = pygame.Rect(left, top, width, height)
         self.__clicked = Event()
+        self.__hovered = Event()
         self.surface = surface
         self.tag = tag
 
@@ -19,8 +20,20 @@ class Button:
             while True:
                 self.__clicked.wait()
                 func()
-                print("Func exec\n")
                 self.__clicked.clear()
+
+        t = Thread(target=wrapper)
+        t.start()
+
+    def on_hover(self, func):
+        mt = Thread(target=self.__hover_event_loop)
+        mt.start()
+
+        def wrapper():
+            while True:
+                self.__hovered.wait()
+                func()
+                self.__hovered.clear()
 
         t = Thread(target=wrapper)
         t.start()
@@ -32,7 +45,12 @@ class Button:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if self.rect.collidepoint(x, y):
                         self.__clicked.set()
-                        print("Clicked.\n")
+
+    def __hover_event_loop(self):
+        while True:
+            x, y = pygame.mouse.get_pos()
+            if self.rect.collidepoint(x, y):
+                self.__hovered.set()
 
     def render(self, surface: pygame.surface):
         surface.blit(self.surface, self.__coords)
